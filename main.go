@@ -13,6 +13,21 @@ var books []Book
 
 
 func main() {
+
+	var dbConnectionString string = goDotEnvVariable("MONGO_URI")
+
+	client, ctx, cancel, err := connect(dbConnectionString)
+    if err != nil {
+        panic(err)
+    }
+     
+    // Release resource when the main
+    // function is returned.
+    defer close(client, ctx, cancel)
+     
+    // Ping mongoDB with Ping method
+    ping(client, ctx)
+
 	// Init the Mux router
 	r := mux.NewRouter()
 
