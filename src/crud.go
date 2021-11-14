@@ -1,4 +1,4 @@
-package main
+package src
 
 import (
 	"encoding/json"
@@ -9,14 +9,17 @@ import (
 	"github.com/gorilla/mux"
 )
 
+var books [] Book
+
+
 // Get all books
-func getBooks(w http.ResponseWriter, r *http.Request) {
+func GetBooks(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(books)
 }
 
 // Get single book
-func getBook(w http.ResponseWriter, r *http.Request) {
+func GetBook(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	params := mux.Vars(r) // gets params
 	// Loop through books and find id
@@ -31,7 +34,7 @@ func getBook(w http.ResponseWriter, r *http.Request) {
 }
 
 // Create a New Book
-func createBook(w http.ResponseWriter, r *http.Request) {
+func CreateBook(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	var book Book
 	_ = json.NewDecoder(r.Body).Decode(&book)
@@ -43,7 +46,7 @@ func createBook(w http.ResponseWriter, r *http.Request) {
 }
 
 // Update a book
-func updateBook(w http.ResponseWriter, r *http.Request) {
+func UpdateBook(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	params := mux.Vars(r)
 	
@@ -64,7 +67,7 @@ func updateBook(w http.ResponseWriter, r *http.Request) {
 }
 
 // Delete a book
-func deleteBook(w http.ResponseWriter, r *http.Request) {
+func DeleteBook(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	params := mux.Vars(r)
 	

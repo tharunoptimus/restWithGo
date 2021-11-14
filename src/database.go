@@ -1,4 +1,4 @@
-package main
+package src
 
 import (
 	"context"
@@ -10,7 +10,7 @@ import (
 	"go.mongodb.org/mongo-driver/mongo/readpref"
 )
 
-func close(client *mongo.Client, ctx context.Context,
+func Close(client *mongo.Client, ctx context.Context,
 	cancel context.CancelFunc) {
 
 	// CancelFunc to cancel to context
@@ -28,7 +28,7 @@ func close(client *mongo.Client, ctx context.Context,
 	}()
 }
 
-func connect(uri string) (*mongo.Client, context.Context, context.CancelFunc, error) {
+func Connect(uri string) (*mongo.Client, context.Context, context.CancelFunc, error) {
 
 	// ctx will be used to set deadline for process, here
 	// deadline will of 30 seconds.
@@ -43,7 +43,7 @@ func connect(uri string) (*mongo.Client, context.Context, context.CancelFunc, er
 // mongo.Client and context.Context
 // This method used to ping the mongoDB, return error if any.
 
-func ping(client *mongo.Client, ctx context.Context) error {
+func Ping(client *mongo.Client, ctx context.Context) error {
 
 	// mongo.Client has Ping to ping mongoDB, deadline of
 	// the Ping method will be determined by cxt

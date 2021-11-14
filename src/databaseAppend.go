@@ -1,6 +1,6 @@
-package main
+package src
 
-func addBooks(books []Book) []Book {
+func AddBooks(books []Book) []Book {
 	books = append(books, Book{
 		ID:    "1",
 		Isbn:  "12341234",
