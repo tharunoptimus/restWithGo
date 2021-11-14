@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"net/http"
 
@@ -15,6 +16,7 @@ var books []Book
 func main() {
 
 	var dbConnectionString string = goDotEnvVariable("MONGO_URI")
+	var port string = goDotEnvVariable("PORT")
 
 	client, ctx, cancel, err := connect(dbConnectionString)
     if err != nil {
@@ -26,7 +28,7 @@ func main() {
     defer close(client, ctx, cancel)
      
     // Ping mongoDB with Ping method
-    ping(client, ctx)
+	ping(client, ctx)
 
 	// Init the Mux router
 	r := mux.NewRouter()
@@ -41,5 +43,7 @@ func main() {
 	r.HandleFunc("/api/books/{id}", updateBook).Methods("PUT")
 	r.HandleFunc("/api/books/{id}", deleteBook).Methods("DELETE")
 
-	log.Fatal(http.ListenAndServe(":8000", r))
+	// Start the server
+	fmt.Println("Server listening on port "+ port)
+	log.Fatal(http.ListenAndServe(":"+port, r))
 }
