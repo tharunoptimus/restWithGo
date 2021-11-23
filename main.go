@@ -12,8 +12,6 @@ import (
 
 // Initialize books variable as a slide Book struct
 
-
-
 func main() {
 
 	var dbConnectionString string = s.GoDotEnvVariable("MONGO_URI")
@@ -23,11 +21,11 @@ func main() {
     if err != nil {
         panic(err)
     }
-     
+
     // Release resource when the main
     // function is returned.
     defer s.Close(client, ctx, cancel)
-     
+
     // Ping mongoDB with Ping method
 	s.Ping(client, ctx)
 
